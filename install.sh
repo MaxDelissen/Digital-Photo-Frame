@@ -20,12 +20,16 @@ pip3 install Pillow
 echo "Installing requests..."
 pip3 install requests
 
+# Install Google API client libraries (Google Auth and OAuthlib)
+echo "Installing Google API client libraries..."
+pip3 install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+
 # Install any other dependencies for the project
 echo "Installing additional Python dependencies..."
 pip3 install random time
 
 # Verify installation
 echo "Verifying installations..."
-python3 -c "import tkinter; import requests; import PIL; print('All dependencies are installed successfully!')"
+python3 -c "import tkinter; import requests; import PIL; import googleapiclient; import google.auth; print('All dependencies are installed successfully!')"
 
 echo "All dependencies installed. You can now run your project!"
