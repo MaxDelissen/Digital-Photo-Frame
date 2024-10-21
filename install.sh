@@ -20,13 +20,13 @@ pip3 install Pillow
 echo "Installing requests..."
 pip3 install requests
 
+# Install prerequisite packages for Google API libraries
+echo "Installing prerequisite libraries for Google API client..."
+sudo apt install build-essential libssl-dev libffi-dev python3-dev -y
+
 # Install Google API client libraries (Google Auth and OAuthlib)
 echo "Installing Google API client libraries..."
 pip3 install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
-
-# Install any other dependencies for the project
-echo "Installing additional Python dependencies..."
-pip3 install random time
 
 # Verify installation
 echo "Verifying installations..."
