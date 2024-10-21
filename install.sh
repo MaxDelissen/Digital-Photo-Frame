@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Define variables for your project
+SERVICE_NAME="photo-frame"
+PROJECT_PATH="/home/pi/photo-frame"  # Replace with the correct path to your project
+EXECUTABLE="python3 $PROJECT_PATH/main.py"  # Replace 'main.py' with your script's entry point
+
 # Update the system package list
 echo "Updating package list..."
 sudo apt update -y
@@ -32,4 +37,43 @@ pip3 install --no-cache-dir --index-url https://pypi.org/simple --upgrade google
 echo "Verifying installations..."
 python3 -c "import tkinter; import requests; import PIL; import googleapiclient; import google.auth; print('All dependencies are installed successfully!')"
 
-echo "All dependencies installed. You can now run your project!"
+echo "All dependencies installed. Setting up systemd service..."
+
+# Create a systemd service file
+sudo bash -c "cat > /etc/systemd/system/$SERVICE_NAME.service" <<EOL
+[Unit]
+Description=Digital Photo Frame Service
+After=network.target
+
+[Service]
+ExecStart=$EXECUTABLE
+WorkingDirectory=$PROJECT_PATH
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+# Set the proper permissions for the service file
+sudo chmod 644 /etc/systemd/system/$SERVICE_NAME.service
+
+# Reload systemd to recognize the new service
+echo "Reloading systemd..."
+sudo systemctl daemon-reload
+
+# Enable the service to start on boot
+echo "Enabling the service to start at boot..."
+sudo systemctl enable $SERVICE_NAME
+
+# Start the service
+echo "Starting the service..."
+sudo systemctl start $SERVICE_NAME
+
+# Check the status of the service
+sudo systemctl status $SERVICE_NAME
+
+echo "Service setup complete! Your project will now start on boot."
