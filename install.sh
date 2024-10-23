@@ -1,8 +1,12 @@
 #!/bin/bash
 
-# Define variables for your project
-SERVICE_NAME="photo-frame"
-PROJECT_PATH="/home/pi/photo-frame"  # Replace with the correct path to your project
+# Prompt for Service name
+read -p "Enter the Service name: " SERVICE_NAME
+
+# Set the Project path to the current directory
+PROJECT_PATH=$(pwd)
+
+# Define the executable
 EXECUTABLE="python3 $PROJECT_PATH/main.py"  # Replace 'main.py' with your script's entry point
 
 # Update the system package list
