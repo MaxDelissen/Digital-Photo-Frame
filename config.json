@@ -2,7 +2,9 @@
   "album_title": "Familie Album ",
   "random_pool": 20,
   "amount_of_recent_items": 10,
-  "display_duration": 1,
+  "display_duration": 4,
+  "clock_size": 100,
+  "date_size": 80,
   "screen_width": 1920,
   "screen_height": 1080,
   "cropImages": false
