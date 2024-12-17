@@ -1,13 +1,15 @@
 import json
 import threading
-import cv2
 import pygame
 import locale
 from image_handler import fetch_images, fetch_and_process_image
 from display_utils import display_welcome_message, display_error_message, render_clock_and_date
 from video_utils import display_video
 
-locale.setlocale(locale.LC_TIME, 'nl_NL')
+try:
+    locale.setlocale(locale.LC_TIME, 'nl_NL')
+except locale.Error:
+    locale.setlocale(locale.LC_TIME, 'C')  # Fallback to the default locale
 
 with open('config.json', 'r') as config_file:
     config = json.load(config_file)
